@@ -18,6 +18,9 @@ class Hangman {
     private:
     
     string selectedWord;
+    int numberOfLettersInWord = 0;
+    
+    
     
 public:
     
@@ -26,7 +29,16 @@ public:
     Hangman(string word);
     ~Hangman(void);
     
+    string getWord();
+    void setWord(string word);
+    
+    int getNumberOfLettersInWord();
+    void setNumberOfLettersInWord(int number);
+    
     int calculateNumberOfLettersInWord();
+    bool checkIfWordContainsLetter(char letter);
+    
+    void askForLetter();
 };
 
 

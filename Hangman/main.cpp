@@ -10,7 +10,7 @@
 #include <fstream>
 #include <ctime>
 
-#include "MyString.cpp"
+#include "Hangman.hpp"
 
 using namespace std;
 
@@ -18,16 +18,15 @@ using namespace std;
 void menu();
 long wordCounter();
 string loadWord(int);
+void startGame();
 
 #pragma mark - Main()
 int main() {
     
     menu();
     
-    int wordNumber = int(wordCounter());
-    string selectedWord = loadWord(wordNumber);
+
     
-    cout<<"The random word was: "<<selectedWord<<endl;
     return 0;
 }
 
@@ -47,7 +46,7 @@ void menu() {
         switch (selection) {
             case 1:
                 //New Game Logic
-                cout << "Start New Game." << endl;
+                startGame();
                 invalidSelection = false;
                 break;
                 
@@ -99,7 +98,7 @@ string loadWord(int wordCount) {
     } else {
         
         // Generate random number between 1 and wordCount
-        srand(time(0));
+        srand(int(time(0)));
         int wordNumber = rand() % wordCount + 1;
         
         for (int lineNumber = 1; getline(file,word) && lineNumber <= wordNumber; lineNumber++) {
@@ -112,4 +111,26 @@ string loadWord(int wordCount) {
     }
     
     return word;
+}
+
+void startGame() {
+    
+    int wordNumber = int(wordCounter());
+    string selectedWord = loadWord(wordNumber);
+    
+    Hangman game = Hangman(selectedWord);
+    
+    cout<<endl;
+    
+    for (int counter = 1; counter <= game.getNumberOfLettersInWord() - 1; counter++) {
+        
+        cout<<"_ ";
+    }
+    
+    cout<<endl;
+    
+    game.askForLetter();
+    cout<<"The selected word is: "<<game.getWord()<<endl;
+    
+    
 }
