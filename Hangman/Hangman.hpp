@@ -46,6 +46,7 @@ public:
     
     bool startGame();
     void drawLetterLines(int number);
+    void drawHangMan();
 };
 
 
