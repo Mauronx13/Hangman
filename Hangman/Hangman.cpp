@@ -37,6 +37,39 @@ Hangman::~Hangman(void) {
     
 }
 
+void Hangman::menu() {
+    
+    int selection;
+    bool invalidSelection = true;
+    
+    while (invalidSelection) {
+        
+        cout << "*---- Hangman Game Menu ----*" << endl << endl;
+        cout << "1. New Game" << endl
+        << "2. Exit Game" << endl;
+        cin >> selection;
+        
+        switch (selection) {
+            case 1:
+                //New Game Logic
+                startGame();
+                invalidSelection = false;
+                break;
+                
+            case 2:
+                //Exit Game
+                invalidSelection = false;
+                break;
+                
+            default:
+                //                system("cls");
+                cout << "ERROR: Invalid selection from the menu." << endl;
+                break;
+                
+        } // End Switch & Case
+    } // End While Loop
+}
+
 string Hangman::getWord() {
     
     return this->selectedWord;
@@ -66,13 +99,27 @@ int Hangman::calculateNumberOfLettersInWord() {
     return numberOfLetters;
 }
 
-void Hangman::checkIfWordContainsLetter(char letter) {
+void Hangman::checkIfWordContainsLetter(char letter, int wordSize) {
     
     size_t position = this->selectedWord.find(letter, 0);
     
     if (position != std::string::npos) {
         
-        cout<<"The letter was found at the position: "<<position<<endl;
+        wordArray[position] = letter;
+        printFoundLetters(wordArray, wordSize);
+        
+        bool status = checkIfWordIsGuessed(wordArray, wordSize);
+        
+        if (status) {
+            cout<<"\nWinner Winner Chicken Dinner!"<<endl;
+            activeGame = false;
+        }
+        
+        bool guessedCorreclty = guessWord();
+        
+        if (guessedCorreclty) {
+            activeGame = false;
+        }
         
         
     } else {
@@ -99,6 +146,7 @@ void Hangman::askForLetter() {
             cout<<"Letter already used, please try a different letter"<<endl;
             letterUsed = true;
             break;
+            
         }
     }
     
@@ -106,36 +154,32 @@ void Hangman::askForLetter() {
         
         guessedLetters[numberOfLettersUsed] = letter;
         numberOfLettersUsed++;
-        numberOfFailedAttempts++;
+        
     }
         
-    checkIfWordContainsLetter(letter);
+    checkIfWordContainsLetter(letter, numLetters);
 }
 
 bool Hangman::startGame() {
     
 
-    bool activeGame = true;
-    const int numLetters = numberOfLettersInWord;
+    activeGame = true;
+    numLetters = numberOfLettersInWord;
     
     drawLetterLines(numLetters);
     
     while (activeGame) {
         
-        if (this->numberOfFailedAttempts < this->maxFailedAttemps) {
+        if (numberOfFailedAttempts < maxFailedAttemps) {
             askForLetter();
 
         } else {
             activeGame = false;
         }
-        
-        
     }
     
     return true;
 }
-
-
 
 void Hangman::drawLetterLines(int number) {
     
@@ -147,38 +191,70 @@ void Hangman::drawLetterLines(int number) {
     cout<<endl;
 }
 
-void Hangman::menu() {
+void Hangman::printFoundLetters(char array[], int size) {
     
-    int selection;
-    bool invalidSelection = true;
+    for (int counter = 0; counter < size - 1; counter++) {
         
-        while (invalidSelection) {
+        char currentLetter = wordArray[counter];
+        
+        if (currentLetter != NULL) {
             
-            cout << "*---- Hangman Game Menu ----*" << endl << endl;
-            cout << "1. New Game" << endl
-                 << "2. Exit Game" << endl;
-            cin >> selection;
+            cout<<currentLetter<<" ";
             
-            switch (selection) {
-                case 1:
-                    //New Game Logic
-                    startGame();
-                    invalidSelection = false;
-                    break;
+        } else {
+            
+            cout<<"_ ";
+        }
+    }
+}
+
+bool Hangman::checkIfWordIsGuessed(char arra[], int size) {
     
-                case 2:
-                    //Exit Game
-                    //ExitGame();
-                    invalidSelection = false;
-                    break;
-                    
-                default:
-                    //                system("cls");
-                    cout << "ERROR: Invalid selection from the menu." << endl;
-                    break;
-                    
-            } // End Switch & Case
-        } // End While Loop
+    bool status = false;
+    
+    for (int counter = 0; counter < size - 1; counter++) {
+        
+        char currentLetter = wordArray[counter];
+        
+        if (currentLetter != NULL && counter == (size - 2)) {
+            
+            status = true;
+            
+        } else if (currentLetter == NULL) {
+            
+            return false;
+        }
+    }
+    
+    return status;
+}
+
+bool Hangman::guessWord() {
+    
+    char selection = 'N';
+    string word;
+    
+    cout<<"Do you want to guess the word? (Y/N)"<<endl;
+    cin>>selection;
+    
+    if (selection == 'y' || selection == 'Y') {
+        
+        cout<<"Enter the word: "<<endl;
+        cin>>word;
+        
+        word = word + "\r";
+        
+        if (word == selectedWord) {
+            
+            cout<<"\nWinner Winner Chicken Dinner!!!"<<endl;
+            
+            return true;
+            
+        } else {
+            
+            cout<<"\nWrong Guess"<<endl;
+        }
+
     }
 
 

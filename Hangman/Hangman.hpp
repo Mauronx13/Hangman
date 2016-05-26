@@ -20,10 +20,12 @@ class Hangman {
     static const int MAX_LEN = maxArrayLegth;
     static const int MAX_LETTER_LENGTH = maxNumberOFGuessedLetters;
     
+    bool activeGame;
     string selectedWord;
     int numberOfLettersInWord = 0;
-    char guessedLetters[MAX_LETTER_LENGTH];
-    char wordArray[MAX_LEN];
+    char guessedLetters[MAX_LETTER_LENGTH] = {0};
+    char wordArray[MAX_LEN] = {0};
+    int numLetters = 0;
     int numberOfLettersUsed = 0;
     int numberOfFailedAttempts = 0;
     int maxFailedAttemps = 0;
@@ -36,15 +38,15 @@ public:
     ~Hangman(void);
     
     void menu();
+    bool startGame();
     string getWord();
     void setWord(string word);
     int getNumberOfLettersInWord();
     void setNumberOfLettersInWord(int number);
     int calculateNumberOfLettersInWord();
     void askForLetter();
-    void checkIfWordContainsLetter(char letter);
-    
-    bool startGame();
+    void checkIfWordContainsLetter(char letter, int wordSize);
+    void printFoundLetters(char array[], int size);
     void drawLetterLines(int number);
     void drawHangMan();
 };
