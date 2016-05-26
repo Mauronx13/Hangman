@@ -129,6 +129,8 @@ bool Hangman::startGame() {
     return true;
 }
 
+
+
 void Hangman::drawLetterLines(int number) {
     
     for (int counter = 1; counter <= number - 1; counter++) {
@@ -136,3 +138,37 @@ void Hangman::drawLetterLines(int number) {
         cout<<"_ ";
     }
 }
+
+void Hangman::menu() {
+    
+    int selection;
+    bool invalidSelection = true;
+        
+        while (invalidSelection) {
+            
+            cout << "*---- Hangman Game Menu ----*" << endl << endl;
+            cout << "1. New Game" << endl
+                 << "2. Exit Game" << endl;
+            cin >> selection;
+            
+            switch (selection) {
+                case 1:
+                    //New Game Logic
+                    startGame();
+                    invalidSelection = false;
+                    break;
+    
+                case 2:
+                    //Exit Game
+                    //ExitGame();
+                    invalidSelection = false;
+                    break;
+                    
+                default:
+                    //                system("cls");
+                    cout << "ERROR: Invalid selection from the menu." << endl;
+                    break;
+                    
+            } // End Switch & Case
+        } // End While Loop
+    }

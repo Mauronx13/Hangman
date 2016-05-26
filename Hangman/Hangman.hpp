@@ -31,6 +31,7 @@ public:
     Hangman(string word);
     ~Hangman(void);
     
+    void menu();
     string getWord();
     void setWord(string word);
     int getNumberOfLettersInWord();
