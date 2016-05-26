@@ -260,6 +260,95 @@ bool Hangman::guessWord() {
     return false;
 }
 
+void Hangman::drawHangMan() {
+    
+    switch (numberOfFailedAttempts) {
+            
+        case 0:
+            
+         cout << "============"  << endl
+              << "||         |"  << endl
+              << "||         |"  << endl
+              << "||          "  << endl
+              << "||          "  << endl
+              << "||          "  << endl
+              << "||          "  << endl
+              <<"=======      "  << endl << endl;
+         break;
+  
+     case 1:
+         cout << "============"   << endl
+              << "||         |"   << endl
+              << "||         |"   << endl
+              << "||         O"   << endl
+              << "||          "   << endl
+              << "||          "   << endl
+              << "||          "   << endl
+              <<"=======      "   << endl << endl;
+         break;
+  
+     case 2:
+         cout << "============"   << endl
+              << "||         |"   << endl
+              << "||         |"   << endl
+              << "||         O"   << endl
+              << "||         |"   << endl
+              << "||          "   << endl
+              << "||          "   << endl
+              <<"=======      "   << endl << endl;
+         break;
+  
+     case 3:
+         cout << "============"   << endl
+              << "||         |"   << endl
+              << "||         |"   << endl
+              << "||         O"   << endl
+              << "||        /|"   << endl
+              << "||         |"   << endl
+              << "||          "   << endl
+              <<"=======      "   << endl << endl;
+         break;
+  
+     case 4:
+         cout << "============ "   << endl
+              << "||         | "   << endl
+              << "||         | "   << endl
+              << "||         O "   << endl
+              << "||        /|\\"  << endl
+              << "||         | "   << endl
+              << "||           "   << endl
+              <<"=======       "   << endl << endl;
+         break;
+  
+     case 5:
+         cout << "============ "   << endl
+              << "||         | "   << endl
+              << "||         | "   << endl
+              << "||         O "   << endl
+              << "||        /|\\"  << endl
+              << "||         | "   << endl
+              << "||        /  "   << endl
+              <<"=======       "   << endl << endl;
+         break;
+         
+     case 6:
+         cout << "============ "   << endl
+              << "||         | "   << endl
+              << "||         | "   << endl
+              << "||         O "   << endl
+              << "||        /|\\"  << endl
+              << "||         | "   << endl
+              << "||        / \\"   << endl
+              <<"=======       "   << endl << endl;
+         break;
+         
+     default:
+         cout << "GAME OVER!" << endl;
+         break;
+    }
+}
+
+
 
 
 

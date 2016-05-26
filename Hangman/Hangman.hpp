@@ -50,6 +50,7 @@ public:
     void drawLetterLines(int number);
     bool checkIfWordIsGuessed(char array[], int size);
     bool guessWord();
+    void drawHangMan();
 };
 
 
