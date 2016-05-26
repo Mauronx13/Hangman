@@ -13,6 +13,7 @@ using namespace std;
 Hangman::Hangman() {
     
     this->selectedWord = "default";
+    this->maxFailedAttemps = 6;
     this->numberOfLettersInWord = calculateNumberOfLettersInWord();
     
 }
@@ -21,11 +22,14 @@ Hangman::Hangman(const Hangman &hangman) {
     
     this->selectedWord = hangman.selectedWord;
     this->numberOfLettersInWord = hangman.numberOfLettersInWord;
+    this->maxFailedAttemps = hangman.maxFailedAttemps;
+
 }
 
 Hangman::Hangman(string word) {
     
     this->selectedWord = word;
+    this->maxFailedAttemps = 6;
     this->numberOfLettersInWord = calculateNumberOfLettersInWord();
 }
 
@@ -74,6 +78,7 @@ bool Hangman::checkIfWordContainsLetter(char letter) {
     } else {
         
         cout<<"Wrong letter"<<endl;
+        this->numberOfFailedAttempts++;
     }
     
     return false;
@@ -82,9 +87,52 @@ bool Hangman::checkIfWordContainsLetter(char letter) {
 void Hangman::askForLetter() {
     
     char letter;
+    bool letterUsed = false;
     
     cout<<"Enter a letter: "<<endl;
     cin>>letter;
     
+    for (int counter = 0; counter < 27; counter++) {
+        
+        char foundLetter = this->guessedLetters[counter];
+        
+        if (foundLetter == letter) {
+            
+            cout<<"Letter already used, please try a different letter"<<endl;
+            letterUsed = true;
+            break;
+        }
+    }
+    
+    if (!letterUsed) {
+        
+        this->guessedLetters[this->numberOfLettersUsed] = letter;
+        numberOfLettersUsed++;
+    }
+        
     checkIfWordContainsLetter(letter);
+}
+
+bool Hangman::startGame() {
+    
+    int numLetters = numberOfLettersInWord;
+    bool activeGame = true;
+    
+    drawLetterLines(numLetters);
+    
+    while (this->numberOfFailedAttempts < this->maxFailedAttemps) {
+        
+        askForLetter();
+        
+    }
+    
+    return true;
+}
+
+void Hangman::drawLetterLines(int number) {
+    
+    for (int counter = 1; counter <= number - 1; counter++) {
+        
+        cout<<"_ ";
+    }
 }

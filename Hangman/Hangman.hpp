@@ -19,8 +19,10 @@ class Hangman {
     
     string selectedWord;
     int numberOfLettersInWord = 0;
-    
-    
+    char guessedLetters[27];
+    int numberOfLettersUsed = 0;
+    int numberOfFailedAttempts = 0;
+    int maxFailedAttemps = 0;
     
 public:
     
@@ -31,14 +33,14 @@ public:
     
     string getWord();
     void setWord(string word);
-    
     int getNumberOfLettersInWord();
     void setNumberOfLettersInWord(int number);
-    
     int calculateNumberOfLettersInWord();
     bool checkIfWordContainsLetter(char letter);
-    
     void askForLetter();
+    
+    bool startGame();
+    void drawLetterLines(int number);
 };
 
 

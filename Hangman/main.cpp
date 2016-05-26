@@ -122,15 +122,10 @@ void startGame() {
     
     cout<<endl;
     
-    for (int counter = 1; counter <= game.getNumberOfLettersInWord() - 1; counter++) {
-        
-        cout<<"_ ";
-    }
+    game.startGame();
     
-    cout<<endl;
-    
-    game.askForLetter();
-    cout<<"The selected word is: "<<game.getWord()<<endl;
+
+//    cout<<"The selected word is: "<<game.getWord()<<endl;
     
     
 }
