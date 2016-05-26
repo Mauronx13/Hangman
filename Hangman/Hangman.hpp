@@ -48,7 +48,8 @@ public:
     void checkIfWordContainsLetter(char letter, int wordSize);
     void printFoundLetters(char array[], int size);
     void drawLetterLines(int number);
-    void drawHangMan();
+    bool checkIfWordIsGuessed(char array[], int size);
+    bool guessWord();
 };
 
 
