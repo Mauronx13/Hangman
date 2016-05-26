@@ -6,6 +6,7 @@
 //  Copyright © 2016 Maria Vargas Aponte. All rights reserved.
 //
 
+#include <iostream>
 #include "Hangman.hpp"
 
 using namespace std;
@@ -126,6 +127,8 @@ void Hangman::checkIfWordContainsLetter(char letter, int wordSize) {
         
         cout<<"Wrong letter"<<endl;
         this->numberOfFailedAttempts++;
+        
+        drawHangMan();
     }
 }
 
@@ -183,6 +186,10 @@ bool Hangman::startGame() {
 
 void Hangman::drawLetterLines(int number) {
     
+    cout<<endl<<endl;
+    
+    drawHangMan();
+    
     for (int counter = 1; counter <= number - 1; counter++) {
         
         cout<<"_ ";
@@ -234,7 +241,7 @@ bool Hangman::guessWord() {
     char selection = 'N';
     string word;
     
-    cout<<"Do you want to guess the word? (Y/N)"<<endl;
+    cout<<"\n\nDo you want to guess the word? (Y/N)"<<endl;
     cin>>selection;
     
     if (selection == 'y' || selection == 'Y') {
@@ -293,7 +300,7 @@ void Hangman::drawHangMan() {
               << "||         |"   << endl
               << "||         O"   << endl
               << "||         |"   << endl
-              << "||          "   << endl
+              << "||         |"   << endl
               << "||          "   << endl
               <<"=======      "   << endl << endl;
          break;
@@ -340,6 +347,10 @@ void Hangman::drawHangMan() {
               << "||         | "   << endl
               << "||        / \\"   << endl
               <<"=======       "   << endl << endl;
+            
+            cout<<"GAME OVER!"<<endl;
+            cout<<"The word was: "<<selectedWord<<endl<<endl;
+            
          break;
          
      default:

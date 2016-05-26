@@ -23,8 +23,14 @@ void startGame();
 #pragma mark - Main()
 int main() {
     
-    menu();
+    int wordNumber = int(wordCounter());
+    string selectedWord = loadWord(wordNumber);
     
+    Hangman game = Hangman(selectedWord);
+    
+    cout<<endl;
+    
+    game.menu();
 
     
     return 0;

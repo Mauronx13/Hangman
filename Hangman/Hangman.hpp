@@ -11,7 +11,9 @@
 
 #include <stdio.h>
 #include "Constants.h"
-#include "MyString.hpp"
+#include <string>
+
+using namespace std;
 
 class Hangman {
     
