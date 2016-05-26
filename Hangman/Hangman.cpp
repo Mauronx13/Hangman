@@ -66,22 +66,20 @@ int Hangman::calculateNumberOfLettersInWord() {
     return numberOfLetters;
 }
 
-bool Hangman::checkIfWordContainsLetter(char letter) {
+void Hangman::checkIfWordContainsLetter(char letter) {
     
     size_t position = this->selectedWord.find(letter, 0);
     
     if (position != std::string::npos) {
         
         cout<<"The letter was found at the position: "<<position<<endl;
-        return true;
+        
         
     } else {
         
         cout<<"Wrong letter"<<endl;
         this->numberOfFailedAttempts++;
     }
-    
-    return false;
 }
 
 void Hangman::askForLetter() {
@@ -89,7 +87,7 @@ void Hangman::askForLetter() {
     char letter;
     bool letterUsed = false;
     
-    cout<<"Enter a letter: "<<endl;
+    cout<<"\nEnter a letter: "<<endl;
     cin>>letter;
     
     for (int counter = 0; counter < 27; counter++) {
@@ -106,8 +104,9 @@ void Hangman::askForLetter() {
     
     if (!letterUsed) {
         
-        this->guessedLetters[this->numberOfLettersUsed] = letter;
+        guessedLetters[numberOfLettersUsed] = letter;
         numberOfLettersUsed++;
+        numberOfFailedAttempts++;
     }
         
     checkIfWordContainsLetter(letter);
@@ -115,14 +114,21 @@ void Hangman::askForLetter() {
 
 bool Hangman::startGame() {
     
-    int numLetters = numberOfLettersInWord;
+
     bool activeGame = true;
+    const int numLetters = numberOfLettersInWord;
     
     drawLetterLines(numLetters);
     
-    while (this->numberOfFailedAttempts < this->maxFailedAttemps) {
+    while (activeGame) {
         
-        askForLetter();
+        if (this->numberOfFailedAttempts < this->maxFailedAttemps) {
+            askForLetter();
+
+        } else {
+            activeGame = false;
+        }
+        
         
     }
     
@@ -137,6 +143,8 @@ void Hangman::drawLetterLines(int number) {
         
         cout<<"_ ";
     }
+    
+    cout<<endl;
 }
 
 void Hangman::menu() {

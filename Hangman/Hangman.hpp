@@ -10,16 +10,20 @@
 #define Hangman_hpp
 
 #include <stdio.h>
+#include "Constants.h"
 #include "MyString.hpp"
-
 
 class Hangman {
     
     private:
     
+    static const int MAX_LEN = maxArrayLegth;
+    static const int MAX_LETTER_LENGTH = maxNumberOFGuessedLetters;
+    
     string selectedWord;
     int numberOfLettersInWord = 0;
-    char guessedLetters[27];
+    char guessedLetters[MAX_LETTER_LENGTH];
+    char wordArray[MAX_LEN];
     int numberOfLettersUsed = 0;
     int numberOfFailedAttempts = 0;
     int maxFailedAttemps = 0;
@@ -37,8 +41,8 @@ public:
     int getNumberOfLettersInWord();
     void setNumberOfLettersInWord(int number);
     int calculateNumberOfLettersInWord();
-    bool checkIfWordContainsLetter(char letter);
     void askForLetter();
+    void checkIfWordContainsLetter(char letter);
     
     bool startGame();
     void drawLetterLines(int number);

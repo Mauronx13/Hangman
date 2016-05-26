@@ -32,6 +32,7 @@
 		447E513F1CF5401800DE5D98 /* Hangman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Hangman.hpp; sourceTree = "<group>"; };
 		447E51421CF5419300DE5D98 /* MyString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyString.cpp; sourceTree = "<group>"; };
 		447E51431CF5419300DE5D98 /* MyString.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyString.hpp; sourceTree = "<group>"; };
+		44C257951CF6A1A9008CC774 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,7 @@
 			children = (
 				447E513E1CF5401800DE5D98 /* Hangman.cpp */,
 				447E513F1CF5401800DE5D98 /* Hangman.hpp */,
+				44C257951CF6A1A9008CC774 /* Constants.h */,
 			);
 			name = "Hangman Class";
 			sourceTree = "<group>";
@@ -269,6 +271,7 @@
 				447E513C1CF3E09000DE5D98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
